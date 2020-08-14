@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>不使用earthsdk</title>
+  <link rel="stylesheet" href="./cesium/Cesium/Widgets/widgets.css">
+  <script src="./cesium/Cesium/Cesium.js"></script>
+  <style>
+    #mapContainer {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+</head>
+<body>
+<div id="mapContainer"></div>
+<script>
+  var viewer = new Cesium.Viewer('mapContainer', {
+    shouldAnimate: true, // 允许展示动效果
+    animation: false, // 是否创建动画小器件，左下角仪表
+    baseLayerPicker: false, // 是否显示图层选择器
+    fullscreenButton: false, // 是否显示全屏按钮
+    geocoder: false, // 是否显示geocoder小器件，右上角查询按钮
+    homeButton: false, // 是否显示Home按钮
+    infoBox: false, // 是否显示信息框
+    sceneModePicker: false, // 是否显示3D/2D选择器
+    selectionIndicator: false, // 是否显示选取指示器组件
+    timeline: false, // 是否显示时间轴
+    navigationHelpButton: false, // 是否显示右上角的帮助按钮
+    scene3DOnly: true, // 如果设置为true，则所有几何图形以3D模式绘制以节约GPU资源
+    showRenderLoopErrors: true, // debug用
+    requestRenderMode: false, // 开启后能降低CPU/GPU使用且减少移动设备上的电量,因为渲染frame只会在需要时发生,但要手动请求更新,因此关闭
+    skyAtmosphere: false, // 隐藏天空
+    orderIndependentTranslucency: false,
+    contextOptions: {
+      webgl: {
+        alpha: true
+      }
+    },
+    shadows: false, // 取消太阳照射造成的阴影
+    sun: false,
+    imageryProvider: new Cesium.UrlTemplateImageryProvider({
+      url: "https://mt1.google.cn/vt/lyrs=s&x={x}&y={y}&z={z}"
+    })
+  })
+  viewer.entities.add({
+    position: window.Cesium.Cartesian3.fromDegrees(20.50707912652358, 31.19765211907971, 0),
+    model: {
+      uri: "/model/63.gltf",
+      scale: 20000
+    }
+  });
+</script>
+</body>
+</html>
